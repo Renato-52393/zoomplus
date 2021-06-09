@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     },
     direita: {
         marginRight: '0',
-        width:'10%',
+        width: '10%',
     },
 }));
 
@@ -89,19 +89,6 @@ function Meeting() {
         video.srcObject.getTracks()[0].stop();
     }
 
-    const mute = () => {
-        let audio = document.getElementsByClassName("audio")[0];
-        audio.srcObject.getTracks().forEach((t) => {
-            if (t.kind === 'audio') t.disbaled = !t.disbaled;
-        });
-    }
-
-    const unmute = () => {
-        let audio = document.getElementsByClassName("audio")[0];
-        audio.srcObject.getTracks().forEach((t) => {
-            if (t.kind === 'audio') t.enabled = !t.enabled;
-        });
-    }
 
 
     return <div className="meeting">
@@ -124,42 +111,34 @@ function Meeting() {
                 </Buttons>
             )}
 
-            {muted ? (
-                <Buttons variant="outlined" color="primary"
-                    onClick={unmute}>Conectar Áudio
-                </Buttons>
-            ) : (
-                <Buttons variant="outlined" color="primary"
-                    onClick={mute}>Desconectar Áudio
-                </Buttons>
-            )}
-            <div classname = {classes.direita}>
-            <Container >
-                <Row>
-                <div  className="pedro">
-                    Pedro
+            <div classname={classes.direita}>
+                <Container >
+                    <Row>
+                        <div className="pedro">
+                            Pedro
                 </div>
-                </Row>
+                    </Row>
                     <Row>
                         <Col xs={9} />
                         <Col>
-                            <input type="checkbox"/>
+                            <input type="checkbox"  />
                         </Col>
+
                         <Col>
-                            Áudio
+                            Áudio disponível
                         </Col>
                     </Row>
                     <Row>
-                        <Col xs={9}/>
+                        <Col xs={9} />
                         <Col>
-                            <input type="checkbox"/>
+                            <input type="checkbox" />
                         </Col>
                         <Col>
-                            Vídeo
+                            Vídeo disponível
                         </Col>
                     </Row>
                 </Container>
-                </div>
+            </div>
 
 
             <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
