@@ -4,6 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+import Buttons from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -35,6 +42,16 @@ function ScheduleMeeting() {
     let history = useHistory();
     const classes = useStyles();
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <div className={classes.paper}>
             <p>Agendar uma reunião!</p>
@@ -53,15 +70,37 @@ function ScheduleMeeting() {
                     <Form.Control type="duration" placeholder="Inserir duração" />
                 </Form.Group>
             </Form>
+            <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
+                Agendar
+      </Buttons>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Reunião agendada"}</DialogTitle>
+                <Form><Form.Group className={classes.form} controlId="formBasicName">
+                </Form.Group>
+                </Form>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    </DialogContentText>
+                    <div>
+                        <p>Reunião agendada com sucesso</p>
+            </div>
+                </DialogContent>
+                <DialogActions>
+                    <button onClick={() => {
+                        history.push("/homepage");
+                    }}
+                    >OK
+        </button>
+                </DialogActions>
+            </Dialog>
             <Button variant="outline-primary"
                 onClick={() => {
-                    history.push("/");
-                }}
-            >Agendar
-     </Button>
-            <Button variant="outline-primary"
-                onClick={() => {
-                    history.push("/");
+                    history.push("/homepage");
                 }}
             >Cancelar
      </Button>

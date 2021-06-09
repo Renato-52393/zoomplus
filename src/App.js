@@ -7,6 +7,7 @@ import ScheduleMeeting from "./containers/ScheduleMeeting";
 import Chat from "./containers/Chat";
 import Channel from "./containers/Channel";
 import Meeting from "./containers/Meeting";
+import Forum from "./containers/Forum";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { useState } from 'react';
@@ -25,8 +26,9 @@ function App() {
           <Route exact path="/join-meeting" component={JoinMeeting} />
           <Route exact path="/schedule-meeting" component={ScheduleMeeting} />
           <Route exact path="/chat" component={Chat} />
-          <Route exact path="/chat/add-channel" component={Channel} />
+          <Route exact path="/channel" component={Channel} />
           <Route exact path="/meeting" component={Meeting} />
+          <Route exact path="/forum" component={Forum} />
           
         </Switch>
       </Router>

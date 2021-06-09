@@ -57,7 +57,7 @@ function HomePage() {
                 open={open}
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
+                aria-describedby="alert-dialog-description11"
             >
                 <DialogTitle id="alert-dialog-title">{"Criar reunião"}</DialogTitle>
                 <Form><Form.Group className={classes.form} controlId="formBasicName">
@@ -79,64 +79,40 @@ function HomePage() {
                 </DialogActions>
             </Dialog>
 
-
-
-            <button onClick={() => {
+            <Buttons variant="outlined" color="primary" onClick={() => {
                 history.push("/join-meeting");
             }}
             >Juntar a Reuniao
-        </button>
-            <button onClick={() => {
+        </Buttons>
+            <Buttons variant="outlined" color="primary" onClick={() => {
                 history.push("/schedule-meeting");
             }}
             >Agendar Reuniao
-        </button>
-            <button onClick={() => {
+        </Buttons>
+            <Buttons variant="outlined" color="primary" onClick={() => {
                 history.push("/forum");
             }}
             >Forum
-        </button>
-            <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
-                Canais
-      </Buttons>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Criar canal"}</DialogTitle>
-                <Form><Form.Group className={classes.form} controlId="formBasicName">
-                </Form.Group>
-                </Form>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Form>
-                        <Form.Group className={classes.form} controlId="formBasicChannel">
-                            <Form.Label>Nome do canal</Form.Label>
-                            <Form.Control type="channel" placeholder="Insira o nome do canal" />
-                        </Form.Group>
-                        <div>
-                            <input type="checkbox" /> Público
-            </div>
-                        <Form.Group className={classes.form} controlId="formBasicMembers">
-                            <Form.Label>Adicionar membros (opcional)</Form.Label>
-                            <Form.Control type="members" placeholder="Pesquisar pelo nome" />
-                        </Form.Group>
-                    </Form>
+        </Buttons>
 
-                    <button onClick={() => {
-                        history.push("/homepage");
-                    }}
-                    >Criar canal
-        </button>
-                </DialogActions>
-            </Dialog>
+        
+        <Buttons variant="outlined" color="primary" onClick={() => {
+                history.push("/channel");
+            }}
+            >Canais
+        </Buttons>
+
+
+          
+
+
+
+       
+
+            
 
         </div>
+       
     );
 }
 export default HomePage;

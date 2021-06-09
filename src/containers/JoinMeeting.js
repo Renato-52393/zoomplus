@@ -4,6 +4,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
+import Buttons from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -28,6 +35,16 @@ function JoinMeeting() {
     let history = useHistory();
     const classes = useStyles();
 
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
     return (
         <div className={classes.paper}>
             <p>Juntar a uma reunião!</p>
@@ -42,26 +59,45 @@ function JoinMeeting() {
                     <Form.Control type="name" placeholder="Insira o seu nome" />
                 </Form.Group>
             </Form>
-            <div>
-                <input type="checkbox" /> Entrar com áudio
-            </div>
-            <div>
-                <input type="checkbox" /> Entrar com vídeo
-            </div>
+            
 
 
-            <Button variant="outline-primary"
+            <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
+                Juntar
+      </Buttons>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Juntar a uma reunião"}</DialogTitle>
+                <Form><Form.Group className={classes.form} controlId="formBasicName">
+                </Form.Group>
+                </Form>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    </DialogContentText>
+                    <div>
+                        <p>Juntando a reunião</p>
+                        <input type="checkbox" /> Entrar com áudio
+                        <input type="checkbox" /> Entrar com vídeo
+            </div>
+                </DialogContent>
+                <DialogActions>
+                    <button onClick={() => {
+                        history.push("/meeting");
+                    }}
+                    >OK
+        </button>
+                </DialogActions>
+            </Dialog>
+            <Buttons variant="outlined" color="primary"
                 onClick={() => {
-                    history.push("/join");
-                }}
-            >Juntar
-     </Button>
-            <Button variant="outline-primary"
-                onClick={() => {
-                    history.push("/");
+                    history.push("/homepage");
                 }}
             >Cancelar
-     </Button>
+     </Buttons>
 
         </div>
     );

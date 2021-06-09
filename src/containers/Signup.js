@@ -6,6 +6,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+
+import Buttons from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+
 const useStyles = makeStyles((theme) => ({
     paper: {
         margin: 'auto',
@@ -39,7 +47,19 @@ const useStyles = makeStyles((theme) => ({
 
 function Signup() {
     let history = useHistory();
+    
+    //alert
     const classes = useStyles();
+
+    const [open, setOpen] = React.useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     return (
         <div className={classes.paper}>
@@ -79,16 +99,36 @@ function Signup() {
                     <Form.Control type="password" placeholder="Password" />
                 </Form.Group>
             </Form>
-            <input type="text" placeholder="email" />
-            <input type="text" placeholder="username" />
-            <input type="text" placeholder="password" />
-            <input type="text" placeholder="repeat password" />
-            <button
-                onClick={() => {
-                    history.push("/signin");
-                }}
-            >Registar
-     </button>
+          
+            <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
+                Registar
+      </Buttons>
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Registar"}</DialogTitle>
+                <Form><Form.Group className={classes.form} controlId="formBasicName">
+                </Form.Group>
+                </Form>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                    </DialogContentText>
+                    <div>
+                        <p>Utilizador criado com sucesso</p>
+            </div>
+                </DialogContent>
+                <DialogActions>
+                    <button onClick={() => {
+                        history.push("/signin");
+                    }}
+                    >OK
+        </button>
+                </DialogActions>
+            </Dialog>
+     
         </div>
     );
 }

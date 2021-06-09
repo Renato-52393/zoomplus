@@ -3,6 +3,9 @@ import "./Meeting.css";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 //alerts
 import Form from 'react-bootstrap/Form';
@@ -34,6 +37,10 @@ const useStyles = makeStyles((theme) => ({
     submit: {
         margin: theme.spacing(2, 0, 2),
     },
+    direita: {
+        marginRight: '0',
+        width:'10%',
+    },
 }));
 
 function Meeting() {
@@ -64,6 +71,7 @@ function Meeting() {
         navigator.getUserMedia(
             {
                 video: true,
+                audio: false,
             },
             (stream) => {
                 let video = document.getElementsByClassName("meeting_videoFeed")[0];
@@ -80,38 +88,24 @@ function Meeting() {
         let video = document.getElementsByClassName("meeting_videoFeed")[0];
         video.srcObject.getTracks()[0].stop();
     }
+
     const mute = () => {
-        navigator.getUserMedia(
-            {
-                video: true,
-                muted: true,
-            },
-            (stream) => {
-                let video = document.getElementsByClassName("meeting_videoFeed")[0];
-                if (video) {
-                    video.srcObject = stream;
-                }
-            },
-            (err) => console.error(err)
-        );
-    }
-    const unmute = () => {
-        navigator.getUserMedia(
-            {
-                video: true,
-                muted: false,
-            },
-            (stream) => {
-                let video = document.getElementsByClassName("meeting_videoFeed")[0];
-                if (video) {
-                    video.srcObject = stream;
-                }
-            },
-            (err) => console.error(err)
-        );
+        let audio = document.getElementsByClassName("audio")[0];
+        audio.srcObject.getTracks().forEach((t) => {
+            if (t.kind === 'audio') t.disbaled = !t.disbaled;
+        });
     }
 
+    const unmute = () => {
+        let audio = document.getElementsByClassName("audio")[0];
+        audio.srcObject.getTracks().forEach((t) => {
+            if (t.kind === 'audio') t.enabled = !t.enabled;
+        });
+    }
+
+
     return <div className="meeting">
+        Vasco Martins
         <div className="meeting_container">
             <video
                 height={HEIGHT}
@@ -121,23 +115,52 @@ function Meeting() {
                 className="meeting_videoFeed"
             ></video>
             {playing ? (
-                <Button variant="outline-primary"
-                    onClick={stopVideo}>Parar Vídeo
-                </Button>
+                <Buttons variant="outlined" color="primary"
+                    onClick={stopVideo}>Desligar câmara
+                </Buttons>
             ) : (
-                <Button variant="outline-primary"
-                    onClick={startVideo}>Iniciar Vídeo
-                </Button>
+                <Buttons variant="outlined" color="primary"
+                    onClick={startVideo}>Ligar câmara
+                </Buttons>
             )}
+
             {muted ? (
-                <Button variant="outline-primary"
+                <Buttons variant="outlined" color="primary"
                     onClick={unmute}>Conectar Áudio
-                </Button>
+                </Buttons>
             ) : (
-                <Button variant="outline-primary"
+                <Buttons variant="outlined" color="primary"
                     onClick={mute}>Desconectar Áudio
-                </Button>
+                </Buttons>
             )}
+            <div classname = {classes.direita}>
+            <Container >
+                <Row>
+                <div  className="pedro">
+                    Pedro
+                </div>
+                </Row>
+                    <Row>
+                        <Col xs={9} />
+                        <Col>
+                            <input type="checkbox"/>
+                        </Col>
+                        <Col>
+                            Áudio
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col xs={9}/>
+                        <Col>
+                            <input type="checkbox"/>
+                        </Col>
+                        <Col>
+                            Vídeo
+                        </Col>
+                    </Row>
+                </Container>
+                </div>
+
 
             <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
                 BreakoutRooms
@@ -168,29 +191,23 @@ function Meeting() {
             </div>
                 </DialogContent>
                 <DialogActions>
-                    <Buttons onClick={handleClose} color="primary">
+                    <Buttons onClick={handleClose} variant="outlined" color="primary">
                         Criar
           </Buttons>
                 </DialogActions>
             </Dialog>
 
-
-
-
-
-
-
-            <Button variant="outline-primary"
+            <Buttons variant="outlined" color="primary"
                 onClick={() => {
                 }}
             >Chat
-     </Button>
-            <Button variant="outline-primary"
+     </Buttons>
+            <Buttons variant="outlined" color="primary"
                 onClick={() => {
-                    history.push("/");
+                    history.push("/homepage");
                 }}
             >Sair
-     </Button>
+     </Buttons>
         </div >
         <div className="meeting_input"></div>
     </div >
