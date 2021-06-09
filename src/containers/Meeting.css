@@ -1,0 +1,16 @@
+.meeting{
+    display: flex;
+    flex-direction: column;
+    justify-content:  center;
+}
+
+.meeting_container{
+    margin-top: 10px;
+    width: 600px;
+    height: 500px;
+    border: 1px solid #000;
+}
+
+.meeting_input{
+    margin-top: 10px;
+}
