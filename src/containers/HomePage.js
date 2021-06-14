@@ -52,7 +52,7 @@ function HomePage() {
             <p>Bem vindo ao ZOOMPLUS!</p>
             <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
                 Criar Reunião
-      </Buttons>
+            </Buttons>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -68,14 +68,15 @@ function HomePage() {
                     </DialogContentText>
                     <div>
                         <input type="checkbox" /> Entrar com áudio
-            </div>
+                    </div>
                 </DialogContent>
                 <DialogActions>
                     <button onClick={() => {
                         history.push("/meeting");
+                        console.log('Reunião criada!');
                     }}
                     >Criar
-        </button>
+                    </button>
                 </DialogActions>
             </Dialog>
 
@@ -83,36 +84,26 @@ function HomePage() {
                 history.push("/join-meeting");
             }}
             >Juntar a Reuniao
-        </Buttons>
+            </Buttons>
             <Buttons variant="outlined" color="primary" onClick={() => {
                 history.push("/schedule-meeting");
             }}
             >Agendar Reuniao
-        </Buttons>
+            </Buttons>
             <Buttons variant="outlined" color="primary" onClick={() => {
-                history.push("/forum");
+                history.push("/posteditor");
             }}
             >Forum
-        </Buttons>
+            </Buttons>
 
-        
-        <Buttons variant="outlined" color="primary" onClick={() => {
+
+            <Buttons variant="outlined" color="primary" onClick={() => {
                 history.push("/channel");
             }}
             >Canais
-        </Buttons>
-
-
-          
-
-
-
-       
-
-            
-
+            </Buttons>
         </div>
-       
+
     );
 }
 export default HomePage;

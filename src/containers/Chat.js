@@ -2,8 +2,6 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
@@ -37,7 +35,7 @@ function Chat() {
                     history.push("/chat/add-channel");
                 }}
             >Criar Canal
-    </Button>
+            </Button>
 
         </div>
     );

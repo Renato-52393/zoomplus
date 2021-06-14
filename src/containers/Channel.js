@@ -1,97 +1,59 @@
-import React from "react";
-import { useHistory } from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import Buttons from '@material-ui/core/Button';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
+import React, { Component } from 'react'
+import { withRouter } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-    paper: {
-        marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-    },
-    avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing(1),
-    },
-    submit: {
-        margin: theme.spacing(2, 0, 2),
-    },
-}));
 
-function Channel() {
-    let history = useHistory();
-    const classes = useStyles();
+class Channel extends Component {
 
-    const [open, setOpen] = React.useState(false);
+    constructor(props) {
+        super(props)
 
-    const handleClickOpen = () => {
-        setOpen(true);
+        this.state = {
+            name: '',
+            members: ''
+        };
+
+    }
+    handleChange = input => e => {
+        e.preventDefault();
+        this.setState({ [input]: e.target.value })
+    }
+
+    handleFormSubmit = (e) => {
+        e.preventDefault();
+        const { name, members } = this.state;
+
+        var id = "canal" + Date.now();
+        localStorage.setItem(id, [name, members]);
+        console.log('Canal criado!');
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    exit = () => {
+        this.props.history.push("/homepage");
+    }
 
-    return (
-        <div className={classes.paper}>
-            <p>Bem vindo ao canal</p>
-            <Form>
-                <Form.Group className={classes.form} controlId="formBasicChannel">
-                    <Form.Label>Nome do canal</Form.Label>
-                    <Form.Control type="channel" placeholder="Insira o nome do canal" />
-                </Form.Group>
+    render() {
+        const { name, members } = this.state;
+        return (
+            <form onSubmit={this.handleFormSubmit}>
+                Criar Canal!
+                <p></p>
                 <div>
-                <input type="checkbox" /> Público
-            </div>
-                <Form.Group className={classes.form} controlId="formBasicMembers">
-                    <Form.Label>Adicionar membros (opcional)</Form.Label>
-                    <Form.Control type="members" placeholder="Pesquisar pelo nome" />
-                </Form.Group>
-            </Form>
-         
+                    Nome do Canal: <input type="text" name="name" value={name} onChange={this.handleChange('name')} />
+                </div>
+                <p></p>
 
-            <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
-                Criar canal
-      </Buttons>
-      <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Canal criado"}</DialogTitle>
-                <Form><Form.Group className={classes.form} controlId="formBasicName">
-                </Form.Group>
-                </Form>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                    </DialogContentText>
-                    <div>
-                        <p>Canal criado com sucesso</p>
-            </div>
-                </DialogContent>
-                <DialogActions>
-                    <button onClick={() => {
-                        history.push("/homepage");
-                    }}
-                    >OK
-        </button>
-                </DialogActions>
-            </Dialog>
+                <div>
+                    Membros: <input type="text" name="members" value={members} onChange={this.handleChange('members')} />
+                </div>
+                <p></p>
 
-        </div>
-    );
+                <p></p>
+                <button type="submit">Criar</button>
+                <div>
+                    <button className="exit" onClick={this.exit}>Exit</button>
+                </div>
+            </form>
+        );
+    }
 }
-export default Channel;
+export default withRouter(Channel);

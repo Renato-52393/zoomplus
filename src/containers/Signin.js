@@ -12,6 +12,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
 
+
 const useStyles = makeStyles((theme) => ({
   paper: {
     marginTop: theme.spacing(8),
@@ -33,19 +34,20 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Signin() {
+
   let history = useHistory();
-  
+
   //alert
   const classes = useStyles();
 
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
-      setOpen(true);
+    setOpen(true);
   };
 
   const handleClose = () => {
-      setOpen(false);
+    setOpen(false);
   };
 
   return (
@@ -66,39 +68,40 @@ function Signin() {
       </Form>
 
       <Buttons variant="outline-primary" color="primary" onClick={handleClickOpen}>
-                Login
+        Login
       </Buttons>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Login"}</DialogTitle>
-                <Form><Form.Group className={classes.form} controlId="formBasicName">
-                </Form.Group>
-                </Form>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                    </DialogContentText>
-                    <div>
-                        <p>Login efetuado com sucesso</p>
-            </div>
-                </DialogContent>
-                <DialogActions>
-                    <button onClick={() => {
-                        history.push("/homepage");
-                    }}
-                    >OK
-        </button>
-                </DialogActions>
-            </Dialog>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{"Login"}</DialogTitle>
+        <Form><Form.Group className={classes.form} controlId="formBasicName">
+        </Form.Group>
+        </Form>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+          </DialogContentText>
+          <div>
+            <p>Login efetuado com sucesso</p>
+          </div>
+        </DialogContent>
+        <DialogActions>
+          <button onClick={() => {
+            history.push("/homepage");
+          }}
+          >OK
+          </button>
+        </DialogActions>
+      </Dialog>
+
       <Button variant="outline-primary"
         onClick={() => {
           history.push("/signup");
         }}
       >Registar
-     </Button>
+      </Button>
     </div>
   );
 }

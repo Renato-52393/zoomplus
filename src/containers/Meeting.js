@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import "./Meeting.css";
 import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -62,7 +61,6 @@ function Meeting() {
 
     //webcam
     const [playing, setPlaying] = useState(false);
-    const [muted] = useState(true);
     const HEIGHT = 500;
     const WIDTH = 500;
 
@@ -116,12 +114,12 @@ function Meeting() {
                     <Row>
                         <div className="pedro">
                             Pedro
-                </div>
+                        </div>
                     </Row>
                     <Row>
                         <Col xs={9} />
                         <Col>
-                            <input type="checkbox"  />
+                            <input type="checkbox" />
                         </Col>
 
                         <Col>
@@ -143,7 +141,7 @@ function Meeting() {
 
             <Buttons variant="outlined" color="primary" onClick={handleClickOpen}>
                 BreakoutRooms
-      </Buttons>
+            </Buttons>
             <Dialog
                 open={open}
                 onClose={handleClose}
@@ -161,18 +159,20 @@ function Meeting() {
                     </DialogContentText>
                     <div>
                         <input type="checkbox" /> Atribuir automaticamente
-            </div>
+                    </div>
                     <div>
                         <input type="checkbox" /> Atribuir manualmente
-            </div>
+                    </div>
                     <div>
+
                         <input type="checkbox" /> Permitir que os participantes escolham a sua sala
-            </div>
+                    </div>
+
                 </DialogContent>
                 <DialogActions>
                     <Buttons onClick={handleClose} variant="outlined" color="primary">
                         Criar
-          </Buttons>
+                    </Buttons>
                 </DialogActions>
             </Dialog>
 
@@ -180,13 +180,13 @@ function Meeting() {
                 onClick={() => {
                 }}
             >Chat
-     </Buttons>
+            </Buttons>
             <Buttons variant="outlined" color="primary"
                 onClick={() => {
                     history.push("/homepage");
                 }}
             >Sair
-     </Buttons>
+            </Buttons>
         </div >
         <div className="meeting_input"></div>
     </div >
